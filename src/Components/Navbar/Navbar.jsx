@@ -1,10 +1,17 @@
 import React from "react";
+import { Link } from "react-router";
 
 const Navbar = () => {
-    const links =<>
-    <li className="m-2"><a>Home</a></li>
-    <li className="m-2"><a>About</a></li>
+  const links = (
+    <>
+      <Link to="/">
+        <li className="m-2">Home</li>
+      </Link>
+      <Link to="/about">
+        <li className="m-2">About</li>
+      </Link>
     </>
+  );
   return (
     <div className="navbar ">
       <div className="navbar-start">
@@ -30,15 +37,13 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
-           {links}
+            {links}
           </ul>
         </div>
         <a className="btn btn-ghost text-3xl font-bold">Book Vibe</a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-         {links}
-        </ul>
+        <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
         <a className="btn mr-3 text-white bg-[#23BE0A] rounded-lg">Sign In</a>
