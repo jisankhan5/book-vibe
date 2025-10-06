@@ -1,12 +1,13 @@
 import React from "react";
 import { useLoaderData, useParams } from "react-router";
+import { FaStarHalfAlt } from "react-icons/fa";
+import { addToStoredDB } from "../../Utility/AddtoDB.JS";
 
 const BookDetails = () => {
   const { id } = useParams();
   const bookid = parseInt(id);
   const data = useLoaderData();
   const singleBook = data.find((book) => book.bookId === bookid);
-  console.log(singleBook);
 
   const {
     bookName,
@@ -19,9 +20,16 @@ const BookDetails = () => {
     review,
   } = singleBook;
 
+  const handleMarkAsRead = (id) => {
+    addToStoredDB(id);
+  };
   return (
-    <div className=" w-2/3 mx-auto flex my-10 gap-10">
-      <img className="p-16 rounded-2xl bg-gray-100 w-[500px] " src={image} alt="Image Upcoming" />
+    <div className=" w-2/3 mx-auto md:flex my-10 gap-10">
+      <img
+        className="p-16 rounded-2xl bg-gray-100 w-[500px] "
+        src={image}
+        alt="Image Upcoming"
+      />
       <div>
         <h1 className="text-[40px] font-bold">{bookName}</h1>
         <h2 className="text-xl font-medium">By: {author}</h2>
@@ -55,14 +63,21 @@ const BookDetails = () => {
               <span className="text-[#13131370]">Year of Publishing:</span>
               <span className="font-semibold ml-12">{yearOfPublishing}</span>
             </h4>
-            <h4 className="mt-3">
-              <span className="text-[#13131370]">Rating:</span>
-              <span className="font-semibold ml-32">{rating}</span>
+            <h4 className="mt-3  flex">
+              <span className="text-[#13131370] ">Rating:</span>
+              <span className=" ml-32 font-semibold  flex items-center gap-2">
+                <span>{rating}</span>{" "}
+                <span>
+                  <FaStarHalfAlt />
+                </span>
+              </span>
             </h4>
           </div>
         </div>
-        <button className="btn btn-info m-2">Read</button>
-        <button className="btn btn-success m-2">WishList</button>
+        <button onClick={() => handleMarkAsRead(id)} className="btn  m-2">
+          Read
+        </button>
+        <button className="btn btn-info text-white m-2">WishList</button>
       </div>
     </div>
   );
