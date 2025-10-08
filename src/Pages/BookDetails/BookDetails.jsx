@@ -2,6 +2,11 @@ import React from "react";
 import { useLoaderData, useParams } from "react-router";
 import { FaStarHalfAlt } from "react-icons/fa";
 import { addToStoredDB } from "../../Utility/AddtoDB.JS";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+
+const MySwal = withReactContent(Swal);
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -21,6 +26,12 @@ const BookDetails = () => {
   } = singleBook;
 
   const handleMarkAsRead = (id) => {
+    Swal.fire({
+  title: "Good job!",
+  text: "You clicked the button!",
+  icon: "success"
+});
+
     addToStoredDB(id);
   };
   return (
@@ -30,6 +41,7 @@ const BookDetails = () => {
         src={image}
         alt="Image Upcoming"
       />
+
       <div>
         <h1 className="text-[40px] font-bold">{bookName}</h1>
         <h2 className="text-xl font-medium">By: {author}</h2>
